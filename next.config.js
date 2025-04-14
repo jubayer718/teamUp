@@ -7,11 +7,27 @@
   
   
 
-/**
- * @type {import('next').NextConfig}
- */
+
+
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {
+//   output: 'export',
+  
+//   images: {
+//     unoptimized: true,
+//   },
+// }
+
+// module.exports = nextConfig
+
+
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+    images: {
+    domains: ['lh3.googleusercontent.com'],
+  },
+  reactStrictMode: true, 
 }
- 
-module.exports = nextConfig
+
+module.exports = nextConfig;

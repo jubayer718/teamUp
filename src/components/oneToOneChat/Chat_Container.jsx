@@ -18,7 +18,7 @@ const Chat_Container = () => {
   }
 
   const axiosPublic = useAxiosPublic();  
-  const socketIo = socketIOClient("http://localhost:5000");
+  const socketIo = socketIOClient("http://localhost:5000/");
   const router = useRouter();
   const [chats, setChats] = useState([])
 

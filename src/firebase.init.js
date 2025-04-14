@@ -5,14 +5,14 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCdYl5tK_w0DdrO9K3KySDOtwSvdxhZj1A",
-  authDomain: "team-collaboration-tool-5f096.firebaseapp.com",
-  projectId: "team-collaboration-tool-5f096",
-  storageBucket: "team-collaboration-tool-5f096.firebasestorage.app",
-  messagingSenderId: "281124255447",
-  appId: "1:281124255447:web:b549c89c9f95122195e292"
+  apiKey: process.env.NEXT_PUBLIC_apiKey,
+  authDomain: process.env.NEXT_PUBLIC_authDomain,
+  projectId: process.env.NEXT_PUBLIC_projectId,
+  storageBucket: process.env.NEXT_PUBLIC_storageBucket,
+  messagingSenderId: process.env.NEXT_PUBLIC_messagingSenderId,
+  appId: process.env.NEXT_PUBLIC_appId,
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export default app;
+export default app

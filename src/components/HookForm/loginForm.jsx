@@ -71,7 +71,7 @@ const LoginForm = () => {
 
   const handlePasswordChange = async() => {
     const email = getValues("email");
-    console.log(email);
+    // console.log(email);
     if (!email) {
       return Swal.fire('Please Enter your email first')
     }

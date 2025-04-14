@@ -2,17 +2,23 @@
 import React, { useState } from 'react';
 import Logo from '../assets/svgs/Logo';
 import Link from 'next/link';
-import { FaPlus } from 'react-icons/fa';
-import { IoChatbox, IoHomeOutline } from 'react-icons/io5';
+import { FaPlus, FaProjectDiagram } from 'react-icons/fa';
+import { IoAddCircle, IoChatbox, IoHomeOutline } from 'react-icons/io5';
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
-import { MdNotificationAdd } from 'react-icons/md';
+import { MdMessage, MdNotificationAdd } from 'react-icons/md';
 import { IoMdMenu, IoMdClose } from 'react-icons/io';
 import { RiTeamFill } from "react-icons/ri";
 import { GoProject } from "react-icons/go";
+import { useUser } from "./../../context/UserContext"
+import Image from 'next/image';
 const DashboardLayout = ({ children }) => {
+    const { user, loading } = useUser();
+    // console.log(user);
     const [isActiveMenu, setIsActiveMenu] = useState('dashboard');
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+    if (loading) {
+        return <p>loading...</p>
+    }
     return (
         <div className="flex flex-col h-screen">
             {/* Top Navbar */}
@@ -29,7 +35,13 @@ const DashboardLayout = ({ children }) => {
                     <div tabIndex={0} role="button" className=" cursor-pointer m-1">
                         <div className="avatar">
                             <div className="w-10 rounded-full">
-                                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="User Avatar" />
+                                <Image
+                                    src={user.photoURL}
+                                    width={40}
+                                    height={40}
+                                    alt='Profile pic'
+                                    className='rounded-full '
+                                />
                             </div>
                         </div>
                     </div>
@@ -52,10 +64,18 @@ const DashboardLayout = ({ children }) => {
                                     <FaPlus className='text-xl text-white bg-[#ff584a] p-1 rounded-full' /> Create
                                 </div>
                                 <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-sm">
-                                    <li><Link className='text-black' href='/task'>Task</Link></li>
-                                    <li><Link className='text-black' href='/project'>Project</Link></li>
-                                    <li><Link className='text-black' href='/message'>Message</Link></li>
-                                    <li><Link className='text-black' href='/invite'>Invite</Link></li>
+
+                                    <li className='p-2 rounded-lg cursor-pointer'><Link href={'/addTask'} onClick={() => setIsActiveMenu("addTask")} className={`flex gap-3 items-center text-black ${isActiveMenu === "addTask" && 'bg-[#454547] text-white rounded-lg px-2 py-2'}`}>
+                                        <IoAddCircle /> Add Task
+                                    </Link>
+                                    </li>
+
+
+                                    <li><Link onClick={() => setIsActiveMenu("project")} className={`flex gap-3 items-center text-black ${isActiveMenu === "project" && 'bg-[#454547] text-white rounded-lg px-2 py-2'}`} href='/project'><FaProjectDiagram />Project</Link></li>
+
+                                    <li><Link onClick={() => setIsActiveMenu("message")} className={`flex gap-3 items-center text-black ${isActiveMenu === "message" && 'bg-[#454547] text-white rounded-lg px-2 py-2'}`} href='/message'><MdMessage /> Message</Link></li>
+
+                                    {/* <li><Link onClick={() => setIsActiveMenu("in")} className={`flex gap-3 items-center text-black ${isActiveMenu === "addTask" && 'bg-[#454547] text-white rounded-lg px-2 py-2'}`} className='text-black' href='/invite'>Invite</Link></li> */}
                                 </ul>
                             </div>
                         </li>
@@ -64,7 +84,9 @@ const DashboardLayout = ({ children }) => {
                                 <IoHomeOutline className='text-xl' /> Home
                             </Link>
                         </li>
-                        <li className="p-2 rounded-lg cursor-pointer"><Link onClick={()=>setIsActiveMenu("chat")} className={`flex gap-3 items-center ${isActiveMenu==='chat'&& 'bg-[#454547] rounded-lg px-2 py-2'}`} href={'/chat'}><IoChatbox className='text-xl'></IoChatbox>Chat</Link></li>
+                        <li className="p-2 rounded-lg cursor-pointer"><Link onClick={() => setIsActiveMenu("chat")} className={`flex gap-3 items-center ${isActiveMenu === 'chat' && 'bg-[#454547] rounded-lg px-2 py-2'}`} href={'/chat'}><IoChatbox className='text-xl'></IoChatbox>Chat</Link></li>
+
+
                         <li className="p-2 rounded-lg cursor-pointer">
                             <Link onClick={() => setIsActiveMenu('my-task')} href='/my-task' className={`flex gap-3 items-center ${isActiveMenu === 'my-task' && 'bg-[#454547] rounded px-2 py-2'}`}>
                                 <IoIosCheckmarkCircleOutline className='text-xl' /> My Tasks
@@ -104,7 +126,7 @@ const DashboardLayout = ({ children }) => {
 
                 {/* Main Content */}
                 <div className="flex flex-col flex-1 overflow-y-auto ">
-                   
+
                     {children}
                 </div>
             </div>

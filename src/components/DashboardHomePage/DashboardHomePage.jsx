@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import { GoCheck } from "react-icons/go";
 import { FiUsers } from "react-icons/fi";
 import { CgMenuGridR } from "react-icons/cg";
@@ -10,8 +11,28 @@ import girl from "../../app/assets/image/girl.png"
 import { FaLock } from "react-icons/fa6";
 import { CiCircleCheck } from "react-icons/ci";
 import girlImg from "../../app/assets/image/girl (2).png"
+import { useUser } from "../../context/UserContext";
+import useAxiosPublic from "../useAxiosPublic";
 
 const DashboardHomePage = () => {
+  const { user, loading } = useUser();
+  const axiosPublic = useAxiosPublic();
+  const [tasks,setTasks]=useState([])
+  
+   if (loading) {
+    return <div className="flex items-center justify-center">
+      <span className="loading loading-bars  loading-xl"></span>
+    </div>
+  }
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const { data } = await axiosPublic.get(`/allTask/${user.email}`);
+      setTasks(data)
+    }
+    fetchTasks()
+  },[])
+  
   return (
     <div className="bg-gray-200">
       <div className="p-3">
@@ -68,7 +89,7 @@ const DashboardHomePage = () => {
             </div>
             <hr className="text-gray-300 -mt-4" />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-4 py-5">
+          {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-4 py-5">
             <div className="card  bg-blue-100 card-sm shadow-sm">
               <div className="card-body">
                 <h1 className="text-2xl text-blue-500"><LiaClipboardListSolid /></h1>
@@ -107,7 +128,26 @@ const DashboardHomePage = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-4 py-5">
+              {tasks.map((task) => {
+              return (
+                 <div key={task._id} className="card  bg-blue-100 card-sm shadow-sm">
+              <div className="card-body">
+                   <img  className="w-14 h-14 rounded-full" src={task.image} alt="tasks icon" />
+                    <h2 className="card-title"><strong>Title:</strong> { task?.title}</h2>
+                <p className="text-gray-500 ">
+                 <span className="font-semibold">Description:</span> {task?.description}
+                </p>
+                <div className="justify-start card-actions">
+                <button className="btn">Get Started</button>
+                </div>
+              </div>
+            </div>
+              )
+            })}
+            </div>
 
           </div>
 
@@ -170,13 +210,12 @@ const DashboardHomePage = () => {
           <div className="bg-white p-4 mt-9 rounded-3xl">
            <div className="flex justify-between items-center">
            <div className="flex gap-4">
-              <h2 className="flex gap-3 items-center font-semibold">People</h2>
+              <h2 className="flex gap-3 items-center font-semibold">Projects</h2>
               <p>
                   <label>
                     <select className="text-xs">
-                      <option>Frequent Collaboraters</option>
-                      <option>Recent Collaborate</option>
-                      <option>Recent Collaborate</option>
+                      <option>Recents</option>
+                      <option>Starred</option>
                     </select>
                   </label>
                 </p>
@@ -205,10 +244,6 @@ const DashboardHomePage = () => {
             <p className="py-4 px-3 bg-gray-300 w-[300px] rounded-2xl"></p>
            </div>
            </div>
-           </div>
-           <div className="">
-            <p className="text-center  text-gray-400">Invite your teammates to collaborate in ReamUp</p>
-           <div className="flex justify-center"> <button className="btn my-3 ">Invite teammates</button></div>
            </div>
           </div>
 

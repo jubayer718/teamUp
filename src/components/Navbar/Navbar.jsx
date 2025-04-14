@@ -3,47 +3,39 @@ import Link from "next/link";
 import { useContext } from "react";
 import Logo from "../../app/assets/svgs/Logo";
 import { useUser } from "../../context/UserContext";
+import { usePathname } from "next/navigation";
 
 
 const Navbar = () => {
-  const { user, logOut } = useUser()
+  const { user, logOut } = useUser();
+  const pathName = usePathname();
+  const NavLink = [
+    {name:'Home',path:'/'},
+    { name: 'Product', path: '/product' },
+    { name: 'Solution', path: '/solutions' },
+    { name: 'Get Started' ,path:'/dashboard'}
+    
+  ]
   const menuItem = (
     <>
-      <li>
-        {" "}
-        <Link className="font-bold text-xl" href="/">
-          {" "}
-          Home
-        </Link>{" "}
-      </li>
-      <li>
-        {" "}
-        <Link className="font-bold text-xl" href="product">
-          {" "}
-          Product{" "}
-        </Link>{" "}
-      </li>
-      <li>
-        {" "}
-        <Link className="font-bold text-xl" href="solutions">
-          {" "}
-          Solutions
-        </Link>{" "}
-      </li>
-      <li>
-        {" "}
-        <Link className="font-bold text-xl" href="dashboard">
-          {" "}
-          Get Started
-        </Link>{" "}
-      </li>
+      
+      {NavLink.map((link)=>{
+        return (<li key={link.name}>
+          <Link
+            href={link.path}
+            className={`font-semibold text-xl ${pathName===link.path?"text-[#595CFF] underline" :'text-gray-700'}`}
+          >
+          {link.name}
+          </Link>
+         </li>) 
+      })}
       <li>
         {user?.email ? (
-          <button onClick={logOut} className="font-bold text-xl">
+          <button onClick={logOut} className="font-bold text-xl btn bg-[#595cffab]">
             Logout
           </button>
         ) : (
-          <Link className="font-bold text-xl" href="/login">
+          <Link className="font-bold text-xl btn  bg-[#595cffab]" href="/login">
             Login
           </Link>
         )}

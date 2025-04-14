@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import useAxiosPublic from "../../useAxiosPublic";
 import { useUser } from "../../../context/UserContext";
 
-const socket = io("http://localhost:5000"); // Connect to the backend
+const socket = io("http://localhost:5000/"); // Connect to the backend
 
 const ChatMessage = () => {
   const axiosPublic = useAxiosPublic();

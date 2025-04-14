@@ -1,9 +1,10 @@
 import React from 'react';
+import Tasks from './../../../components/Mytasks/Tasks'
 
 const MyTaskPage = () => {
     return (
         <div>
-            <h2>This My Task page . we will complete this task</h2>
+         <Tasks/>
         </div>
     );
 };
