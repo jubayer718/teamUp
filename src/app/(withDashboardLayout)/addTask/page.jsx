@@ -41,7 +41,9 @@ const AddTask = () => {
       description,
       email: user?.email,
       image:res.data.data.display_url,
-      status: "TODO"
+      status: "TODO",
+      condition:"upcoming",
+      date: new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit' })
 
     }
     // console.log(taskValue);
@@ -70,7 +72,7 @@ const AddTask = () => {
               <fieldset className="fieldset">
 
                 <legend className="fieldset-legend">Pick Icon</legend>
-                <input type="file" name="image" required className="file-input" />
+                <input type="file" name="image"  className="file-input" />
               </fieldset>
 
 

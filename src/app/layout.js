@@ -1,6 +1,14 @@
+
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "../provider/Provider";
+import { Toaster } from "react-hot-toast";
+
+
+
+
+
 
 
 
@@ -17,23 +25,24 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "TeamUp",
-  description: "A collaborative platform for teams",
-  icons: {
-    icon:"/favicon.png"
-  }
+  description: "Team Collaboration Tools",
 };
 
 export default function RootLayout({ children }) {
   return (
+       
     <Providers>
      <html lang="en" data-theme="light">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+                  <Toaster position="top-center"></Toaster>
+              {children}
+
       </body>
     </html>
     </Providers>
+         
  
   );
 }

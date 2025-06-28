@@ -19,8 +19,7 @@ const googleProvider = new GoogleAuthProvider();
 
  const UserContext= createContext(undefined);
 
-const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+const UserProvider=({children})=>{const [user, setUser] = useState(null);
   // console.log(user);
   const [loading, setLoading] = useState(true);
   const axiosPublic = useAxiosPublic();
@@ -59,18 +58,18 @@ const UserProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false)
-      if (currentUser) {
-        const userInfo = { email: currentUser.email };
-        axiosPublic.post("/jwt", userInfo).then((res) => {
-          if (res.data.token) {
-            localStorage.setItem("access-token", res.data.token);
-            setLoading(false);
-          }
-        });
-      } else {
-        localStorage.removeItem("access-token");
-        setLoading(false);
-      }
+      // if (currentUser) {
+      //   const userInfo = { email: currentUser.email };
+      //   axiosPublic.post("/jwt", userInfo).then((res) => {
+      //     if (res.data.token) {
+      //       localStorage.setItem("access-token", res.data.token);
+      //       setLoading(false);
+      //     }
+      //   });
+      // } else {
+      //   localStorage.removeItem("access-token");
+      //   setLoading(false);
+      // }
     });
     return () => {
       unsubscribe();

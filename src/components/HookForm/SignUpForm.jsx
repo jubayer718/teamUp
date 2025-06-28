@@ -55,7 +55,12 @@ const SignUpForm = () => {
       });
 
       // Store user info in DB
-      const userInfo = { name, email };
+      const userInfo = {
+        name,
+        email,
+        admin: false,
+        photo: photo
+      };
       const res = await axiosPublic.post("/users", userInfo);
       if (res.data.insertedId) {
         Swal.fire({

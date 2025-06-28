@@ -2,16 +2,16 @@
 import React, { useState } from 'react';
 import Logo from '../assets/svgs/Logo';
 import Link from 'next/link';
-import { FaPlus, FaProjectDiagram } from 'react-icons/fa';
+import { FaPlus, FaProjectDiagram, FaUser } from 'react-icons/fa';
 import { IoAddCircle, IoChatbox, IoHomeOutline } from 'react-icons/io5';
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
 import { MdMessage, MdNotificationAdd } from 'react-icons/md';
 import { IoMdMenu, IoMdClose } from 'react-icons/io';
 import { RiTeamFill } from "react-icons/ri";
 import { GoProject } from "react-icons/go";
-import { useUser } from "./../../context/UserContext"
+import { useUser } from "../../context/UserContext"
 import Image from 'next/image';
-const DashboardLayout = ({ children }) => {
+const AdminDashboardLayout = ({ children }) => {
     const { user, loading } = useUser();
     // console.log(user);
     const [isActiveMenu, setIsActiveMenu] = useState('dashboard');
@@ -59,7 +59,7 @@ const DashboardLayout = ({ children }) => {
             {/* Layout Container */}
             <div className="flex flex-1 bg-base-200">
                 {/* Sidebar */}
-                <div className={`fixed lg:relative w-64 h-full bg-[#2e2e30] text-white p-4 flex flex-col gap-4 transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-64"} lg:translate-x-0 z-50`}>
+                <div className={`fixed lg:relative w-64 h-full bg-[#2e2e30] text-white p-4 flex flex-col gap-4 transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-64"} lg:translate-x-0`}>
                     <ul className="space-y-2">
                         <li className="p-2 rounded-lg cursor-pointer">
                             <div className="dropdown dropdown-right">
@@ -68,11 +68,7 @@ const DashboardLayout = ({ children }) => {
                                 </div>
                                 <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-sm">
 
-                                    <li className='p-2 rounded-lg cursor-pointer'><Link href={'/addTask'} onClick={() => setIsActiveMenu("addTask")} className={`flex gap-3 items-center text-black ${isActiveMenu === "addTask" && 'bg-[#454547] text-white rounded-lg px-2 py-2'}`}>
-                                        <IoAddCircle /> Add Task
-                                    </Link>
-                                    </li>
-
+                                  
 
                                     <li><Link onClick={() => setIsActiveMenu("project")} className={`flex gap-3 items-center text-black ${isActiveMenu === "project" && 'bg-[#454547] text-white rounded-lg px-2 py-2'}`} href='/project'><FaProjectDiagram />Project</Link></li>
 
@@ -83,11 +79,17 @@ const DashboardLayout = ({ children }) => {
                             </div>
                         </li>
                         <li className="p-2 rounded-lg cursor-pointer">
-                            <Link onClick={() => setIsActiveMenu('dashboard')} href='/dashboard' className={`flex gap-3 items-center ${isActiveMenu === 'dashboard' && 'bg-[#454547] rounded px-2 py-2'}`}>
-                                <IoHomeOutline className='text-xl' /> Home
+                            <Link onClick={() => setIsActiveMenu('adminDashboard')} href='/adminDashboard' className={`flex gap-3 items-center ${isActiveMenu === 'adminDashboard' && 'bg-[#454547] rounded px-2 py-2'}`}>
+                                <IoHomeOutline className='text-xl' /> Dashboard
                             </Link>
                         </li>
-                        <li className="p-2 rounded-lg cursor-pointer"><Link onClick={() => setIsActiveMenu("chat")} className={`flex gap-3 items-center ${isActiveMenu === 'chat' && 'bg-[#454547] rounded-lg px-2 py-2'}`} href={'/chat'}><IoChatbox className='text-xl'></IoChatbox>Chat</Link></li>
+                        <li className="p-2 rounded-lg cursor-pointer"><Link onClick={() => setIsActiveMenu("allUser")} className={`flex gap-3 items-center ${isActiveMenu === 'allUser' && 'bg-[#454547] rounded-lg px-2 py-2'}`} href={'/allUser'}><FaUser className='text-xl'></FaUser>AllUser</Link></li>
+
+                          <li className='p-2 rounded-lg cursor-pointer'><Link href={'/allProject'} onClick={() => setIsActiveMenu("allProject")} className={`flex gap-3 items-center ${isActiveMenu === 'allProject' && 'bg-[#454547] rounded-lg px-2 py-2'}`}>
+                                        <GoProject /> All Project
+                                    </Link>
+                                    </li>
+
 
 
                         <li className="p-2 rounded-lg cursor-pointer">
@@ -137,4 +139,4 @@ const DashboardLayout = ({ children }) => {
     );
 };
 
-export default DashboardLayout;
+export default AdminDashboardLayout;

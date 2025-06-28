@@ -4,8 +4,10 @@ import teamPic1 from "./../../app/assets/image/team.jpg"
 import teamPic2 from "./../../app/assets/image/collaborationImg.jpg"
 import { easeOut, motion } from 'framer-motion';
 import Link from "next/link";
+import useAdmin from "../Admin/useAdmin";
 const HeroSection = () => {
-  const MotionImage = motion(Image)
+  const [admin] = useAdmin();
+  const MotionImage = motion(Image);
   return (
     <div className=" bg-[#690031]">
        <section className=" container mx-auto flex flex-col md:flex-row items-center justify-between gap-5 px-8 md:px-16 lg:px-20 py-20 mt-16">
@@ -33,7 +35,7 @@ const HeroSection = () => {
         </p>
         <div className="mt-6">
           <button className="px-6 py-3 bg-[#595CFF] text-white text-lg font-semibold rounded-lg shadow-md hover:bg-blue-600 transition">
-           <Link href={'dashboard'}>Get Started</Link>
+         {admin? <Link href={"/adminDashboard"}>Get Started</Link>: <Link href={"/dashboard"}>Get Started</Link>}
           </button>
         </div>
       </div>

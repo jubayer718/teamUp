@@ -1,5 +1,6 @@
 import React from 'react';
 import WorkSpace from "../../../components/Shared/MyWorkSpace/WorkSpace"
+
 const WorkSpaceLayout = ({ children }) => {
   return (
     <div>
@@ -7,7 +8,9 @@ const WorkSpaceLayout = ({ children }) => {
       <WorkSpace />
     //main content
       <div>
-        {children}
+       
+            {children}
+      
       </div>
     </div>
   );
