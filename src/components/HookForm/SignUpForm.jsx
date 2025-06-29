@@ -58,7 +58,7 @@ const SignUpForm = () => {
       const userInfo = {
         name,
         email,
-        admin: false,
+        role:"User",
         photo: photo
       };
       const res = await axiosPublic.post("/users", userInfo);

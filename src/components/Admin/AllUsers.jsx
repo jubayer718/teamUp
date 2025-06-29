@@ -2,72 +2,91 @@
 
 import Image from "next/image";
 import useAllUsers from "../Hooks/useAllUsers";
+import {FaUser} from 'react-icons/fa'
+import useAxiosPublic from "../useAxiosPublic";
+import useAdmin from "./useAdmin";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
+
 
 const AllUsers = () => {
-  const [users] = useAllUsers()
+  const [users,refetch] = useAllUsers();
+  const axiosPublic = useAxiosPublic();
 
+  
+
+  const handleMakeAdmin = async(email) => {
+    const response = await axiosPublic.put(`/make-admin/${email}`);
+    if (response.data.modifiedCount > 0) {
+      refetch();
+      toast.success('User made admin successfully');
+    } else {
+      toast.error('Failed to make user admin');
+    }
+  }
+
+  
   return (
     <div>
-    <div className="overflow-x-auto">
-  <table className="table">
-    {/* head */}
-    <thead>
-      <tr>
-        <th>
-          NO:
-        </th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
+      <div className="overflow-x-auto">
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr>
+              <th>
+                NO:
+              </th>
+              <th>Name</th>
+              <th>role</th>
+              <th className="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
             {
-              users.map((user,i) => {
-                return ( 
-                    <tr>
-        <th>
-          {i+1}
-        </th>
-        <td>
-          <div className="flex items-center gap-3">
-            <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
+              users.map((user, i) => {
+                return (
+                  <tr key={i}>
+                    <th>
+                      {i + 1}
+                    </th>
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle h-12 w-12">
                             <Image
                               src={user?.photo}
                               alt="users photo"
                               width={48}
                               height={48}
-                            
+
                             />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">Hart Hagerty</div>
-              <div className="text-sm opacity-50">United States</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          Zemlak, Daniel and Leannon
-          <br />
-          <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-        </td>
-        <td>Purple</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="font-bold">{user.name }</div>
+                       
+                        </div>
+                      </div>
+                    </td>
+                    <td >
+                   <div className={` flex items-center gap-1 p-3 rounded-md ${user.role==="admin"?"bg-green-500 tex-white":"bg-amber-400 text-black"}`}> <FaUser/> <span >{user.role}</span></div>
+                    </td>
+                    <td >
+                      <div className="flex flex-col gap-2">
+                      <button onClick={()=>handleMakeAdmin(user.email)} className="btn bg-green-400 hover:bg-green-500">Make Admin</button>
+                      <button className="btn bg-red-400 hover:bg-red-500">Remove User</button>
+                      </div>
+                    </td>
+                  </tr>
                 )
               })
-      }
-    
-      
-    </tbody>
-    
-  </table>
-</div>
+            }
+
+
+          </tbody>
+
+        </table>
+      </div>
     </div>
   );
 };
