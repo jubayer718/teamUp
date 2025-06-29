@@ -25,7 +25,15 @@ const AllUsers = () => {
     }
   }
 
-  
+  const handleRemoveUser = async (email) => { 
+    const response = await axiosPublic.delete(`/remove-user/${email}`);
+    if (response.data.deletedCount > 0) {
+      refetch();
+      toast.success('User removed successfully');
+    } else {
+      toast.error('Failed to remove user');
+    }
+  }
   return (
     <div>
       <div className="overflow-x-auto">
@@ -69,12 +77,12 @@ const AllUsers = () => {
                       </div>
                     </td>
                     <td >
-                   <div className={` flex items-center gap-1 p-3 rounded-md ${user.role==="admin"?"bg-green-500 tex-white":"bg-amber-400 text-black"}`}> <FaUser/> <span >{user.role}</span></div>
+                   <div className={` flex items-center gap-1 p-3 rounded-md ${user.role==="admin"?"bg-green-500 text-white":"bg-amber-400 text-black"}`}> <FaUser/> <span >{user.role}</span></div>
                     </td>
                     <td >
                       <div className="flex flex-col gap-2">
                       <button onClick={()=>handleMakeAdmin(user.email)} className="btn bg-green-400 hover:bg-green-500">Make Admin</button>
-                      <button className="btn bg-red-400 hover:bg-red-500">Remove User</button>
+                      <button onClick={()=>handleRemoveUser(user.email)} className="btn bg-red-400 hover:bg-red-500">Remove User</button>
                       </div>
                     </td>
                   </tr>
