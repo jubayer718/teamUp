@@ -11,13 +11,7 @@ const Navbar = () => {
   const pathName = usePathname();
   const [admin, isAdminLoading, refetch, error] = useAdmin();
  
-  if (isAdminLoading || loading) {
-    return (
-      <div className="flex items-center justify-center my-12">
-        <span className="loading loading-bars loading-xl"></span>
-      </div>
-    );
-  }
+ 
 
   const NavLink = [
     { name: "Home", path: "/" },

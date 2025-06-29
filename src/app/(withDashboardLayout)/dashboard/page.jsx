@@ -2,8 +2,9 @@ import React from 'react';
 import DashboardHomePage from '../../../components/DashboardHomePage/DashboardHomePage';
 
 const Dashboard = () => {
+  
     return (
-        <div>
+      <div>
           <DashboardHomePage></DashboardHomePage>
         </div>
     );

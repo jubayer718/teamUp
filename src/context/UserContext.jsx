@@ -73,6 +73,7 @@ const UserProvider=({children})=>{const [user, setUser] = useState(null);
     });
     return () => {
       unsubscribe();
+      setLoading(false);
        
     };
   }, [axiosPublic]);

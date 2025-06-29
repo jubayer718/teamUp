@@ -1,13 +1,9 @@
 "use client"
-import React, { useEffect, useState } from "react";
 import { GoCheck } from "react-icons/go";
 import { FiUsers } from "react-icons/fi";
 import { CgMenuGridR } from "react-icons/cg";
-import { FiTriangle } from "react-icons/fi";
-import { LiaClipboardListSolid } from "react-icons/lia";
 import { HiDotsHorizontal } from "react-icons/hi";
 import Image from "next/image";
-import girl from "../../app/assets/image/girl.png"
 import { FaLock } from "react-icons/fa6";
 import { CiCircleCheck } from "react-icons/ci";
 import girlImg from "../../app/assets/image/girl (2).png"
@@ -17,7 +13,6 @@ import Link from "next/link";
 import Swal from "sweetalert2";
 // import CountUp from "react-countup";
 import useTasks from "../Hooks/useTasks";
-import { useRouter } from "next/navigation";
 import useProjects from "../Hooks/useProjects";
 
 
@@ -26,7 +21,6 @@ const DashboardHomePage = () => {
   const axiosPublic = useAxiosPublic();
   const [reface, tasks] = useTasks();
   const [project] = useProjects()
-  const router = useRouter()
 
   // const [tasks, setTasks] = useState([])
 
@@ -36,9 +30,7 @@ const DashboardHomePage = () => {
     </div>
   }
 
-  if (!user) {
-    useRouter.push('/login')
-  }
+ 
 
   const hour = new Date().getHours();
   const greetings = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening"

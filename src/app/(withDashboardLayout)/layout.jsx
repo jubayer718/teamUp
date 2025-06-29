@@ -1,5 +1,4 @@
 'use client';
-import React, { useState } from 'react';
 import Logo from '../assets/svgs/Logo';
 import Link from 'next/link';
 import { FaPlus, FaProjectDiagram } from 'react-icons/fa';
@@ -11,9 +10,23 @@ import { RiTeamFill } from "react-icons/ri";
 import { GoProject } from "react-icons/go";
 import { useUser } from "./../../context/UserContext"
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+
+
+
 const DashboardLayout = ({ children }) => {
     const { user, loading } = useUser();
-    // console.log(user);
+    const router = useRouter()
+    useEffect(() => {
+      if (!user) {
+        router.push('/login')
+      }
+   
+    }, [loading,user, router]);
+  
+    if (loading || !user) return null;
+
     const [isActiveMenu, setIsActiveMenu] = useState('dashboard');
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
      if (loading) {
