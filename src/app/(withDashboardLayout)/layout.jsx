@@ -23,6 +23,8 @@ const DashboardLayout = ({ children }) => {
      <span className="loading loading-bars  loading-xl"></span>
    </div>
  }
+    if (loading || !user) return null;
+    
     useEffect(() => {
       if (!user) {
         router.push('/login')
@@ -30,7 +32,6 @@ const DashboardLayout = ({ children }) => {
    
     }, [loading,user, router]);
   
-    if (loading || !user) return null;
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isActiveMenu, setIsActiveMenu] = useState('dashboard');

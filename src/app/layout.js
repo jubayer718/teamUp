@@ -16,6 +16,10 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "TeamUp",
   description: "Team Collaboration Tools",
+
+  icons: {
+    icon:"/favicon.png"
+  }
 };
 
 export default function RootLayout({ children }) {
