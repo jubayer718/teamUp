@@ -96,10 +96,10 @@ const AllProject = () => {
             <label htmlFor="declineCause " className=''>Decline Cause</label>
             <textarea className='w-full input input-border' placeholder='why make it decline' name="cause" id="declineCause" rows={10} cols={40} required></textarea>
             <div className="modal-action">
-              <form method="dialog">
+            
                 {/* if there is a button in form, it will close the modal */}
-                <button className="btn">Close</button>
-              </form>
+                <button type='button' onClick={()=>document.getElementById('my_modal_1').close()} className="btn">Close</button>
+              
               <button className='btn btn-primary'>Send</button>
             </div>
 

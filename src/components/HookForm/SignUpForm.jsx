@@ -27,6 +27,8 @@ const schema = z.object({
   photo: z.any(),
 });
 
+
+
 const SignUpForm = () => {
   const { createNewUser, setUser, updateUserProfile } = useUser();
   const axiosPublic = useAxiosPublic();

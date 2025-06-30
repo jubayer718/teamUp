@@ -28,13 +28,11 @@ const COLUMNS = [
 
 const Tasks = () => {
   const { user, loading } = useUser();
-  if (loading) {
-    return <p>loading...</p>
-  }
-  // console.log(user);
-  const axiosPublic = useAxiosPublic();
   const [tasks, setTasks] = useState([]);
-  console.log(tasks);
+  const axiosPublic = useAxiosPublic();
+  
+  // console.log(user);
+
 
  useEffect(() => {
    const fetchAllData = async() => {
