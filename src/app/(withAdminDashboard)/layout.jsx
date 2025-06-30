@@ -68,13 +68,6 @@ const AdminDashboardLayout = ({ children }) => {
                                 </div>
                                 <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-sm">
 
-                                  
-
-                                    <li><Link onClick={() => setIsActiveMenu("project")} className={`flex gap-3 items-center text-black ${isActiveMenu === "project" && 'bg-[#454547] text-white rounded-lg px-2 py-2'}`} href='/project'><FaProjectDiagram />Project</Link></li>
-
-                                    <li><Link onClick={() => setIsActiveMenu("message")} className={`flex gap-3 items-center text-black ${isActiveMenu === "message" && 'bg-[#454547] text-white rounded-lg px-2 py-2'}`} href='/message'><MdMessage /> Message</Link></li>
-
-                                    {/* <li><Link onClick={() => setIsActiveMenu("in")} className={`flex gap-3 items-center text-black ${isActiveMenu === "addTask" && 'bg-[#454547] text-white rounded-lg px-2 py-2'}`} className='text-black' href='/invite'>Invite</Link></li> */}
                                 </ul>
                             </div>
                         </li>
@@ -89,43 +82,7 @@ const AdminDashboardLayout = ({ children }) => {
                                         <GoProject /> All Project
                                     </Link>
                                     </li>
-
-
-
-                        <li className="p-2 rounded-lg cursor-pointer">
-                            <Link onClick={() => setIsActiveMenu('my-task')} href='/my-task' className={`flex gap-3 items-center ${isActiveMenu === 'my-task' && 'bg-[#454547] rounded px-2 py-2'}`}>
-                                <IoIosCheckmarkCircleOutline className='text-xl' /> My Tasks
-                            </Link>
-                        </li>
-                        <li className="p-2 rounded-lg cursor-pointer">
-                            <Link onClick={() => setIsActiveMenu('inbox')} href='/inbox' className={`flex gap-3 items-center ${isActiveMenu === 'inbox' && 'bg-[#454547] rounded px-2 py-2'}`}>
-                                <MdNotificationAdd className='text-xl' /> Inbox
-                            </Link>
-                        </li>
-                        <div className="divider border-[#ffffff6e] border-b-1"></div>
-
-                        <li className="p-2 rounded-lg cursor-pointer">
-                            <Link href='/project' className={`flex gap-3 items-center justify-between `}>
-                                Project <FaPlus className='text-xl text-white  p-1 rounded-full' />
-                            </Link>
-                        </li>
-                        <li className="p-2 rounded-lg cursor-pointer">
-                            <Link onClick={() => setIsActiveMenu('/project/1')} href='/project/1' className={`flex gap-3 items-center ${isActiveMenu === '/project/1' && 'bg-[#454547] rounded px-2 py-2'}`}>
-                                <GoProject className='text-xl' /> Project name
-                            </Link>
-                        </li>
-                        <div className="divider border-[#ffffff6e] border-b-1"></div>
-
-                        <li className="p-2 rounded-lg cursor-pointer">
-                            <Link href='/team' className='flex gap-3 items-center'>
-                                Team
-                            </Link>
-                        </li>
-                        <li className="p-2 rounded-lg cursor-pointer">
-                            <Link onClick={() => setIsActiveMenu('/team/1')} href='/team/1' className={`flex gap-3 items-center ${isActiveMenu === '/team/1' && 'bg-[#454547] rounded px-2 py-2'}`}>
-                                <RiTeamFill className='text-xl' /> My Workspace
-                            </Link>
-                        </li>
+                     
                     </ul>
                 </div>
 
