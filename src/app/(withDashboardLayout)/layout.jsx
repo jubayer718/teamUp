@@ -11,13 +11,18 @@ import { GoProject } from "react-icons/go";
 import { useUser } from "./../../context/UserContext"
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 
 const DashboardLayout = ({ children }) => {
     const { user, loading } = useUser();
     const router = useRouter()
+    if (loading) {
+   return <div className="flex items-center justify-center">
+     <span className="loading loading-bars  loading-xl"></span>
+   </div>
+ }
     useEffect(() => {
       if (!user) {
         router.push('/login')
@@ -27,13 +32,8 @@ const DashboardLayout = ({ children }) => {
   
     if (loading || !user) return null;
 
-    const [isActiveMenu, setIsActiveMenu] = useState('dashboard');
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-     if (loading) {
-    return <div className="flex items-center justify-center">
-      <span className="loading loading-bars  loading-xl"></span>
-    </div>
-  }
+    const [isActiveMenu, setIsActiveMenu] = useState('dashboard');
 
     return (
         <div className="flex flex-col h-screen">

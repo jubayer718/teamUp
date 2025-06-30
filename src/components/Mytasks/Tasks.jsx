@@ -45,7 +45,7 @@ const Tasks = () => {
       }
     }
     fetchAllData()
-    // ✅get realtime update data from server
+    // get realtime update data from server
     socket.on("task_added", (newTask) => {
       setTasks((prevTasks) => [...prevTasks, newTask]);
     });
